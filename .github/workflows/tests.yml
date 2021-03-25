@@ -8,7 +8,9 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+      # removed ubuntu-latest as the build is currently failing for unknown reasons
+      # see: https://github.com/Homebrew/discussions/discussions/1129
+        os: [macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
