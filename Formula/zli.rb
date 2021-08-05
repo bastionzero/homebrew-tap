@@ -10,6 +10,7 @@ class Zli < Formula
   head "https://github.com/bastionzero/zli.git"
 
   depends_on "node@12"
+  depends_on "go" => :build
 
   def install
     system "npm", "install", *Language::Node.local_npm_install_args
