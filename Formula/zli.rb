@@ -9,8 +9,8 @@ class Zli < Formula
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git"
 
-  depends_on "node@12"
   depends_on "go" => :build
+  depends_on "node@12"
 
   def install
     system "npm", "install", *Language::Node.local_npm_install_args
