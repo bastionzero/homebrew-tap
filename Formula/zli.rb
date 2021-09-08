@@ -9,7 +9,7 @@ class Zli < Formula
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git"
 
-  depends_on "go" => :build
+  depends_on "go@1.17" => :build
   depends_on "node@12"
 
   def install
