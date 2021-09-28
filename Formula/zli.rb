@@ -14,7 +14,7 @@ class Zli < Formula
 
   def install
     system "npm", "install", *Language::Node.local_npm_install_args
-    system "npm", "run", "release"
+    system "npm", "run", "release-prod"
     rm "./bin/zli-win.exe"
 
     if OS.linux?
