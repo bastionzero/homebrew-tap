@@ -4,8 +4,8 @@ require "os"
 class Zli < Formula
   desc "BastionZero cli"
   homepage "https://www.bastionzero.com"
-  url "https://github.com/bastionzero/zli/releases/download/5.1.19/zli-5.1.19.tar.gz"
-  sha256 "b0fa89fa2214d36b9c015561859d685afaf1316de03eb86e86ed57e58307af00"
+  url "https://github.com/bastionzero/zli/releases/download/5.1.33/zli-5.1.33.tar.gz"
+  sha256 "a2b5f2fa1bd7c433b9e42b785bb1b73eb26fa1844510d3a1abbe67e01634fbe9"
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git"
 
@@ -14,7 +14,7 @@ class Zli < Formula
 
   def install
     system "npm", "install", *Language::Node.local_npm_install_args
-    system "npm", "run", "release"
+    system "npm", "run", "release-prod"
     rm "./bin/zli-win.exe"
 
     if OS.linux?
