@@ -8,9 +8,9 @@ jobs:
   test-bot:
     strategy:
       matrix:
-      # removed ubuntu-latest as the build is currently failing for unknown reasons
-      # see: https://github.com/Homebrew/discussions/discussions/1129
-        os: [macos-latest, ubuntu-latest]
+        # removed ubuntu-latest as the build is currently failing for unknown reasons
+        # see: https://github.com/Homebrew/discussions/discussions/1129
+        os: [macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
@@ -43,4 +43,4 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: bottles
-          path: '*.bottle.*'
+          path: "*.bottle.*"
