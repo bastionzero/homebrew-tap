@@ -1,8 +1,8 @@
 require "language/node"
 require "os"
 
-class ZliStage < Formula
-  desc "BastionZero cli - Stage"
+class ZliBeta < Formula
+  desc "BastionZero cli - Beta"
   homepage "https://www.bastionzero.com"
   url "$URL"
   sha256 "$SHA256"
@@ -19,14 +19,14 @@ class ZliStage < Formula
 
     if OS.linux?
       rm "./bin/zli-macos"
-      bin.install "bin/zli-linux" => "zli-stage"
+      bin.install "bin/zli-linux" => "zli-beta"
     else
       rm "./bin/zli-linux"
-      bin.install "bin/zli-macos" => "zli-stage"
+      bin.install "bin/zli-macos" => "zli-beta"
     end
   end
 
   test do
-    system "zli-stage", "configure"
+    system "zli-btage", "configure"
   end
 end
