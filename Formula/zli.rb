@@ -9,6 +9,11 @@ class Zli < Formula
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git", branch: "master"
 
+  bottle do
+    root_url "https://github.com/bastionzero/homebrew-tap/releases/download/zli-5.2.6"
+    sha256 cellar: :any_skip_relocation, big_sur: "b6be2c0119a9ee589396d427811c291f53f9785a8c1ee6045473439a3d0d4da0"
+  end
+
   depends_on "go@1.17" => :build
   depends_on "node@14"
 
