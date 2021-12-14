@@ -4,15 +4,10 @@ require "os"
 class ZliBeta < Formula
   desc "BastionZero cli - Beta"
   homepage "https://www.bastionzero.com"
-  url "https://github.com/bastionzero/zli/releases/download/5.2.5-beta/zli-5.2.5-beta.tar.gz"
-  sha256 "9b89aa820ea64e0b4f8266acf6ca85a07df12f45caebf6c8349028518804bbd9"
+  url "https://github.com/bastionzero/zli/releases/download/5.2.6-beta/zli-5.2.6-beta.tar.gz"
+  sha256 "06a1f86634c416bf9efb97881de798e99d27ac1dc672e8db0cdd17b03644e7db"
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git", branch: "master"
-
-  bottle do
-    root_url "https://github.com/bastionzero/homebrew-tap/releases/download/zli-beta-5.2.5-beta"
-    sha256 cellar: :any_skip_relocation, big_sur: "9be8576938c42353064d21c686ac7a009d4d9ff3b790e47e94c16284f13a5e8e"
-  end
 
   depends_on "go@1.17" => :build
   depends_on "node@14"
