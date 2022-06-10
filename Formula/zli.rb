@@ -5,7 +5,7 @@ class Zli < Formula
   desc "BastionZero cli"
   homepage "https://www.bastionzero.com"
   url "https://github.com/bastionzero/zli/releases/download/6.6.1/zli-6.6.1.tar.gz"
-  sha256 "7a89690ce5b4a64344a6277ee108e39ab0e7740a8e8ab0e5f4572c84bc5b2a58"
+  sha256 "c8cd71515a595e1b6f76372d55dfeef96f75aabf5bbfe51b6c04c9f612c0a691"
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git", branch: "master"
 
