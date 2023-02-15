@@ -26,6 +26,6 @@ class Zli < Formula
   end
 
   test do
-    system "zli", "configure"
+    system "#{bin}/zli", "configure"
   end
 end
