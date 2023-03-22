@@ -4,8 +4,8 @@ require "os"
 class ZliBeta < Formula
   desc "BastionZero cli - Beta"
   homepage "https://www.bastionzero.com"
-  url "https://github.com/bastionzero/zli/releases/download/6.17.0-beta/zli-6.17.0-beta.tar.gz"
-  sha256 "7dea65e50319d25938560526ad2e4e6f2d156be1bcd496f0b7b63d89740a6c99"
+  url "https://github.com/bastionzero/zli/releases/download/6.17.4-beta/zli-6.17.4-beta.tar.gz"
+  sha256 "17fb821e80fc245a9f369af86a51a452479b7014abb9fdbf409bfa27eaea36b8"
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git", branch: "master"
 
