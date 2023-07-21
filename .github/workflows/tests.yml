@@ -10,7 +10,7 @@ jobs:
       matrix:
         # removed ubuntu-latest as the build is currently failing for unknown reasons
         # see: https://github.com/Homebrew/discussions/discussions/1129
-        os: [macos-11, macos-12, macos-13]
+        os: [macos-11, macos-12, macos-13, self-hosted]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
