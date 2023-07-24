@@ -8,8 +8,6 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        # removed ubuntu-latest as the build is currently failing for unknown reasons
-        # see: https://github.com/Homebrew/discussions/discussions/1129
         os: [macos-11, macos-12, macos-13, self-hosted]
     runs-on: ${{ matrix.os }}
     steps:
@@ -35,7 +33,7 @@ jobs:
 
       - run: brew test-bot --only-tap-syntax
 
-      - run: arch -arm64 brew test-bot --only-formulae --skip-online-checks
+      - run: brew test-bot --only-formulae
         continue-on-error: true
         if: github.event_name == 'pull_request'
 
