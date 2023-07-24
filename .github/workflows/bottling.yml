@@ -1,4 +1,4 @@
-name: MacOS Arm Bottling
+name: macos arm bottling
 on:
   push:
     branches:
@@ -8,6 +8,8 @@ jobs:
   test-bot:
     strategy:
       matrix:
+        # removed ubuntu-latest as the build is currently failing for unknown reasons
+        # see: https://github.com/Homebrew/discussions/discussions/1129
         os: [self-hosted]
     runs-on: ${{ matrix.os }}
     steps:
