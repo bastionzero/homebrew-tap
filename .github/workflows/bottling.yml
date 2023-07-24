@@ -11,7 +11,7 @@ jobs:
         os: [self-hosted]
     runs-on: ${{ matrix.os }}
     steps:
-      - run: brew install -v --build-bottle bastionzero/tap/zli-beta
+      - run: brew install -v --build-bottle bastionzero/homebrew-tap/zli-beta
 
       - run: brew bottle --verbose --json zli-beta --root-url=https://github.com/bastionzero/homebrew-tap/releases/download/zli-beta-6.25.8-beta
 
