@@ -1,4 +1,4 @@
-name: macos arm bottling
+name: MacOS Arm Bottling
 on:
   push:
     branches:
@@ -8,35 +8,12 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        # removed ubuntu-latest as the build is currently failing for unknown reasons
-        # see: https://github.com/Homebrew/discussions/discussions/1129
-        os: []
+        os: [self-hosted]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+      - run: brew install -v --build-bottle bastionzero/tap/zli-beta
 
-      - name: Cache Homebrew Bundler RubyGems
-        id: cache
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ runner.os }}-rubygems-
-
-      - name: Install Homebrew Bundler RubyGems
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: brew install-bundler-gems
-
-      - run: brew test-bot --only-cleanup-before
-
-      - run: brew test-bot --only-setup
-
-      - run: brew test-bot --only-tap-syntax
-
-      - run: brew test-bot --only-formulae
-        if: github.event_name == 'pull_request'
+      - run: brew bottle --verbose --json zli-beta --root-url=https://github.com/bastionzero/homebrew-tap/releases/download/zli-beta-6.25.8-beta
 
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
