@@ -1,6 +1,6 @@
 name: MacOS Arm Bottling
 on:
-  push:
+  pull_request:
     branches:
       - main
   pull_request:
