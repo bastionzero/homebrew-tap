@@ -28,6 +28,7 @@ jobs:
         run: brew install-bundler-gems
 
       - run: brew test-bot --only-cleanup-before
+        continue-on-error: true
 
       - run: brew test-bot --only-setup
 
