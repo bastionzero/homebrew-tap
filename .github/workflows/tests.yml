@@ -5,9 +5,6 @@ on:
       - main
   pull_request:
 
-env:
-  HOMEBREW_NO_INSTALL_FROM_API: 1
-
 jobs:
   test-bot:
     strategy:
@@ -15,30 +12,30 @@ jobs:
         os: [macos-12-arm, macos-13-arm]
     runs-on: ${{ matrix.os }}
     steps:
-      # - name: Set up Homebrew
-      #   id: set-up-homebrew
-      #   uses: Homebrew/actions/setup-homebrew@master
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
 
-      # - name: Cache Homebrew Bundler RubyGems
-      #   id: cache
-      #   uses: actions/cache@v1
-      #   with:
-      #     path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-      #     key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-      #     restore-keys: ${{ runner.os }}-rubygems-
+      - name: Cache Homebrew Bundler RubyGems
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-rubygems-
 
-      # - name: Install Homebrew Bundler RubyGems
-      #   if: steps.cache.outputs.cache-hit != 'true'
-      #   run: brew install-bundler-gems
+      - name: Install Homebrew Bundler RubyGems
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: brew install-bundler-gems
 
-      - run: brew test-bot --only-cleanup-before
+      - run: arch -arm64 brew test-bot --only-cleanup-before
         continue-on-error: true
 
-      - run: brew test-bot --only-setup
+      - run: arch -arm64 brew test-bot --only-setup
 
-      - run: brew test-bot --only-tap-syntax
+      - run: arch -arm64 brew test-bot --only-tap-syntax
 
-      - run: brew test-bot --only-formulae
+      - run: arch -arm64 brew test-bot --only-formulae
         continue-on-error: true
         if: github.event_name == 'pull_request'
 
