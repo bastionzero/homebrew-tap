@@ -15,8 +15,10 @@ jobs:
         continue-on-error: true
         run: softwareupdate --install-rosetta --agree-to-license
 
-      # fixes issue that resulted in "npm ERR! code UNABLE_TO_GET_ISSUER_CERT_LOCALLY"
-      - run: |
+      # Fixes issue that resulted in "npm ERR! code UNABLE_TO_GET_ISSUER_CERT_LOCALLY"
+      - name: Reinstall Brew packages to fix npm error
+        continue-on-error: true
+        run: |
           arch -arm64 brew reinstall openssl@1.1
           arch -arm64 brew reinstall ca-certificates 
 
