@@ -8,7 +8,7 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        os: [macos-11-arm, macos-12-arm]
+        os: [macos-11-arm, macos-12-arm, macos-13-arm]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install Rosetta for any x86 arch operations
@@ -39,7 +39,6 @@ jobs:
       # For macos 11 and 12, we need to add the arch prefix for all brew commands even though
       # running brew commands directly on the box works fine.
       - run: arch -arm64 brew test-bot --only-cleanup-before
-        # There is a permissions warning here which is useless
         continue-on-error: true
 
       - run: arch -arm64 brew test-bot --only-setup
