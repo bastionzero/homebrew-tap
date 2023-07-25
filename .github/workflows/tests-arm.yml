@@ -1,4 +1,4 @@
-name: macos 12 arm brew test-bot
+name: MacOS ARM brew test-bot
 on:
   push:
     branches:
@@ -9,7 +9,7 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        os: [macos-11-arm]
+        os: [macos-11-arm, macos-12-arm, macos-13-arm]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Setup AWS MacOS instances
