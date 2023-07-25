@@ -51,6 +51,8 @@ jobs:
         # This is a temporary fix since our zli bulids x86 AND arm which results in a useless error
         continue-on-error: true
         if: github.event_name == 'pull_request'
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.HOMEBREW_GITHUB_API_TOKEN }}
 
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
