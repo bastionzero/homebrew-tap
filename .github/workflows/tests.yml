@@ -11,10 +11,6 @@ jobs:
         os: [macos-11, macos-12, macos-13, macos-12-arm, macos-13-arm]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-
       - name: Cache Homebrew Bundler RubyGems
         id: cache
         uses: actions/cache@v1
