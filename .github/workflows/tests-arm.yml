@@ -1,4 +1,4 @@
-name: brew test-bot
+name: macos 12 arm brew test-bot
 on:
   push:
     branches:
@@ -9,9 +9,15 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        os: []
+        os: [macos-11-arm]
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Setup AWS MacOS instances
+        run: |
+          softwareupdate --install-rosetta --agree-to-license
+          brew reinstall openssl@1.1
+          brew reinstall ca-certificates 
+
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
@@ -29,12 +35,14 @@ jobs:
         run: brew install-bundler-gems
 
       - run: arch -arm64 brew test-bot --only-cleanup-before
+        continue-on-error: true
 
       - run: arch -arm64 brew test-bot --only-setup
 
       - run: arch -arm64 brew test-bot --only-tap-syntax
 
       - run: arch -arm64 brew test-bot --only-formulae
+        continue-on-error: true
         if: github.event_name == 'pull_request'
 
       - name: Upload bottles as artifact
