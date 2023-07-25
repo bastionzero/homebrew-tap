@@ -17,8 +17,8 @@ jobs:
 
       # fixes issue that resulted in "npm ERR! code UNABLE_TO_GET_ISSUER_CERT_LOCALLY"
       - run: |
-          brew reinstall openssl@1.1
-          brew reinstall ca-certificates 
+          arch -arm64 brew reinstall openssl@1.1
+          arch -arm64 brew reinstall ca-certificates 
 
       - name: Set up Homebrew
         id: set-up-homebrew
