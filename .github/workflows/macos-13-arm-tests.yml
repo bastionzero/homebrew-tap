@@ -1,24 +1,23 @@
-name: MacOS ARM brew test-bot
+name: MacOS 13 ARM brew test-bot
 on:
   push:
     branches:
       - main
   pull_request:
+
 jobs:
   test-bot:
     strategy:
       matrix:
-        os: [macos-11-arm, macos-12-arm]
+        os: [macos-13-arm]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Install Rosetta for any x86 arch operations
-        continue-on-error: true
-        run: softwareupdate --install-rosetta --agree-to-license
+      - run: softwareupdate --install-rosetta --agree-to-license
 
       # fixes issue that resulted in "npm ERR! code UNABLE_TO_GET_ISSUER_CERT_LOCALLY"
       - run: |
-          arch -arm64 brew reinstall openssl@1.1
-          arch -arm64 brew reinstall ca-certificates 
+        brew reinstall openssl@1.1
+        brew reinstall ca-certificates
 
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -36,17 +35,13 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: brew install-bundler-gems
 
-      # For macos 11 and 12, we need to add the arch prefix for all brew commands even though
-      # running brew commands directly on the box works fine.
-      - run: arch -arm64 brew test-bot --only-cleanup-before
-        # There is a permissions warning here which is useless
-        continue-on-error: true
+      - run: brew test-bot --only-cleanup-before
 
-      - run: arch -arm64 brew test-bot --only-setup
+      - run: brew test-bot --only-setup
 
-      - run: arch -arm64 brew test-bot --only-tap-syntax
+      - run: brew test-bot --only-tap-syntax
 
-      - run: arch -arm64 brew test-bot --only-formulae
+      - run: brew test-bot --only-formulae
         # This is a temporary fix since our zli bulids x86 AND arm which results in a useless error
         continue-on-error: true
         if: github.event_name == 'pull_request'
