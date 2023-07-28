@@ -4,12 +4,12 @@ require "os"
 class ZliBeta < Formula
   desc "BastionZero cli - Beta"
   homepage "https://www.bastionzero.com"
-  # https://github.com/Homebrew/brew/issues/15169#issuecomment-1504229816
   url "https://api.github.com/repos/bastionzero/zli/releases/assets/118622363",
     headers: [
       "Accept: application/octet-stream",
       "Authorization: bearer #{ENV["HOMEBREW_GITHUB_API_TOKEN"]}",
     ]
+  version "6.27.0-beta"
   sha256 "5fe26009ecfdf2c2f2f4f7b9b99b6430247c2b1ee5fdca1a5e883e27a035fa8b"
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git", branch: "master"
