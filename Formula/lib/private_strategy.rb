@@ -51,7 +51,7 @@ class GitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
   end
 
   def parse_url_pattern
-    unless match = url.match(%r{https://github.com/([^/]+)/([^/]+)/(\S+)})
+    unless (match = url.match(%r{https://github.com/([^/]+)/([^/]+)/(\S+)}))
       raise CurlDownloadStrategyError, "Invalid url pattern for GitHub Repository."
     end
 
@@ -97,13 +97,9 @@ end
 # your formula. This download strategy uses GitHub access tokens (in the
 # environment variables HOMEBREW_GITHUB_API_TOKEN) to sign the request.
 class GitHubPrivateRepositoryReleaseDownloadStrategy < GitHubPrivateRepositoryDownloadStrategy
-  def initialize(url, name, version, **meta)
-    super
-  end
-
   def parse_url_pattern
     url_pattern = %r{https://github.com/([^/]+)/([^/]+)/releases/download/([^/]+)/(\S+)}
-    raise CurlDownloadStrategyError, "Invalid url pattern for GitHub Release." unless @url =~ url_pattern
+    raise CurlDownloadStrategyError, "Invalid url pattern for GitHub Release." unless @url.match?(url_pattern)
 
     _, @owner, @repo, @tag, @filename = *@url.match(url_pattern)
   end
