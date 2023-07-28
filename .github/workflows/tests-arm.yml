@@ -47,11 +47,6 @@ jobs:
 
       - run: arch -arm64 brew test-bot --only-tap-syntax
 
-      - run: |
-          git config --global http.extraheader "Authorization: Basic $(echo -n "x-access-token:${{ secrets.ROLE_ACCOUNT_GH_ACCESS_TOKEN }}" | base64 | tr -d '\n')"
-        env:
-          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.ROLE_ACCOUNT_GH_ACCESS_TOKEN }}
-
       - run: arch -arm64 brew test-bot --only-formulae
         # This is a temporary fix since our zli bulids x86 AND arm which results in a useless error
         continue-on-error: true
