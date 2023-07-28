@@ -1,14 +1,11 @@
 require "language/node"
 require "os"
+require_relative "lib/private_strategy"
 
 class ZliBeta < Formula
   desc "BastionZero cli - Beta"
   homepage "https://www.bastionzero.com"
-  url "https://api.github.com/repos/bastionzero/zli/releases/assets/118622363",
-    :headers => [
-      "Accept: application/octet-stream",
-      "Authorization: bearer #{ENV["HOMEBREW_GITHUB_API_TOKEN"]}",
-    ]
+  url "https://github.com/bastionzero/zli/releases/download/6.27.0-beta/zli-6.27.0-beta.tar.gz", :using => GitHubPrivateRepositoryDownloadStrategy
   version "6.27.0-beta"
   sha256 "5fe26009ecfdf2c2f2f4f7b9b99b6430247c2b1ee5fdca1a5e883e27a035fa8b"
   license "Apache-2.0"
