@@ -41,8 +41,8 @@
 # it lets you use a private GitHub repository for internal distribution.  It
 # works with public one, but in that case simply use CurlDownloadStrategy.
 class GitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
-  require 'utils/formatter'
-  require 'utils/github'
+  require "utils/formatter"
+  require "utils/github"
 
   def initialize(url, name, version, **meta)
     super
@@ -52,7 +52,7 @@ class GitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
 
   def parse_url_pattern
     unless match = url.match(%r{https://github.com/([^/]+)/([^/]+)/(\S+)})
-      raise CurlDownloadStrategyError, 'Invalid url pattern for GitHub Repository.'
+      raise CurlDownloadStrategyError, "Invalid url pattern for GitHub Repository."
     end
 
     _, @owner, @repo, @filepath = *match
@@ -69,9 +69,9 @@ class GitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
   end
 
   def set_github_token
-    @github_token = ENV['HOMEBREW_GITHUB_API_TOKEN']
+    @github_token = ENV["HOMEBREW_GITHUB_API_TOKEN"]
     unless @github_token
-      raise CurlDownloadStrategyError, 'Environmental variable HOMEBREW_GITHUB_API_TOKEN is required.'
+      raise CurlDownloadStrategyError, "Environmental variable HOMEBREW_GITHUB_API_TOKEN is required."
     end
 
     validate_github_repository_access!
@@ -103,7 +103,7 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < GitHubPrivateRepositoryDo
 
   def parse_url_pattern
     url_pattern = %r{https://github.com/([^/]+)/([^/]+)/releases/download/([^/]+)/(\S+)}
-    raise CurlDownloadStrategyError, 'Invalid url pattern for GitHub Release.' unless @url =~ url_pattern
+    raise CurlDownloadStrategyError, "Invalid url pattern for GitHub Release." unless @url =~ url_pattern
 
     _, @owner, @repo, @tag, @filename = *@url.match(url_pattern)
   end
@@ -117,7 +117,7 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < GitHubPrivateRepositoryDo
   def _fetch(url:, resolved_url:, timeout:)
     # HTTP request header `Accept: application/octet-stream` is required.
     # Without this, the GitHub API will respond with metadata, not binary.
-    curl_download download_url, '--header', 'Accept: application/octet-stream', to: temporary_path
+    curl_download download_url, "--header", "Accept: application/octet-stream", to: temporary_path
   end
 
   def asset_id
@@ -126,10 +126,10 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < GitHubPrivateRepositoryDo
 
   def resolve_asset_id
     release_metadata = fetch_release_metadata
-    assets = release_metadata['assets'].select { |a| a['name'] == @filename }
-    raise CurlDownloadStrategyError, 'Asset file not found.' if assets.empty?
+    assets = release_metadata["assets"].select { |a| a["name"] == @filename }
+    raise CurlDownloadStrategyError, "Asset file not found." if assets.empty?
 
-    assets.first['id']
+    assets.first["id"]
   end
 
   def fetch_release_metadata
