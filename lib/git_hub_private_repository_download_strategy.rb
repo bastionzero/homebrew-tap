@@ -138,9 +138,4 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < GitHubPrivateRepositoryDo
 
     assets.first["id"]
   end
-
-#   def fetch_release_metadata
-#     release_url = "https://api.github.com/repos/#{@owner}/#{@repo}/releases/tags/#{@tag}"
-#     GitHub.open_rest(release_url)
-#   end
 end

@@ -32,8 +32,12 @@ jobs:
 
       - run: brew test-bot --only-setup
 
+      # GitHubPrivateRepositoryDownloadStrategy causes brew style check failures so temporarily disable
       # - run: brew test-bot --only-tap-syntax
 
+      # --skip-online-checks is needed so that private github urls are not
+      # rejected in homebrew audit steps since these urls will return 404 not
+      # found unless using a github PAT with access to the repo
       - run: brew test-bot --only-formulae --skip-online-checks
         if: github.event_name == 'pull_request'
         env:

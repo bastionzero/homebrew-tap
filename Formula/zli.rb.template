@@ -1,10 +1,11 @@
 require "language/node"
 require "os"
+require_relative "../lib/git_hub_private_repository_download_strategy"
 
 class Zli < Formula
   desc "BastionZero cli"
   homepage "https://www.bastionzero.com"
-  url "$URL"
+  url "$URL", :using => GitHubPrivateRepositoryReleaseDownloadStrategy
   sha256 "$SHA256"
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git", branch: "master"
