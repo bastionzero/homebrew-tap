@@ -90,6 +90,11 @@ class GitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
     EOS
     raise CurlDownloadStrategyError, message
   end
+
+  def resolve_url_basename_time_file_size(url, timeout: nil)
+    url = download_url
+    super
+  end
 end
 
 # GitHubPrivateRepositoryReleaseDownloadStrategy downloads tarballs from GitHub
@@ -132,10 +137,5 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < GitHubPrivateRepositoryDo
   def fetch_release_metadata
     release_url = "https://api.github.com/repos/#{@owner}/#{@repo}/releases/tags/#{@tag}"
     GitHub.open_api(release_url)
-  end
-
-  def resolve_url_basename_time_file_size(url, timeout: nil)
-    url = download_url
-    super
   end
 end
