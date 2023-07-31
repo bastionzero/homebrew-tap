@@ -1,62 +1,66 @@
-# name: MacOS ARM brew test-bot
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-# jobs:
-#   test-bot:
-#     strategy:
-#       matrix:
-#         os: [macos-11-arm, macos-12-arm, macos-13-arm]
-#     runs-on: ${{ matrix.os }}
-#     steps:
-#       - name: Install Rosetta for any x86 arch operations
-#         continue-on-error: true
-#         run: softwareupdate --install-rosetta --agree-to-license
+name: MacOS ARM brew test-bot
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  test-bot:
+    strategy:
+      matrix:
+        os: [macos-11-arm, macos-12-arm, macos-13-arm]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Install Rosetta for any x86 arch operations
+        continue-on-error: true
+        run: softwareupdate --install-rosetta --agree-to-license
 
-#       # Fixes issue that resulted in "npm ERR! code UNABLE_TO_GET_ISSUER_CERT_LOCALLY"
-#       - name: Reinstall Brew packages to fix npm error
-#         continue-on-error: true
-#         run: |
-#           arch -arm64 brew reinstall openssl@1.1
-#           arch -arm64 brew reinstall ca-certificates 
+      # Fixes issue that resulted in "npm ERR! code UNABLE_TO_GET_ISSUER_CERT_LOCALLY"
+      - name: Reinstall Brew packages to fix npm error
+        continue-on-error: true
+        run: |
+          arch -arm64 brew reinstall openssl@1.1
+          arch -arm64 brew reinstall ca-certificates 
 
-#       - name: Set up Homebrew
-#         id: set-up-homebrew
-#         uses: Homebrew/actions/setup-homebrew@master
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
 
-#       - name: Cache Homebrew Bundler RubyGems
-#         id: cache
-#         uses: actions/cache@v1
-#         with:
-#           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-#           key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-#           restore-keys: ${{ runner.os }}-rubygems-
+      - name: Cache Homebrew Bundler RubyGems
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-rubygems-
 
-#       - name: Install Homebrew Bundler RubyGems
-#         if: steps.cache.outputs.cache-hit != 'true'
-#         run: brew install-bundler-gems
+      - name: Install Homebrew Bundler RubyGems
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: brew install-bundler-gems
 
-#       # For macos 11 and 12, we need to add the arch prefix for all brew commands even though
-#       # running brew commands directly on the box works fine.
-#       - run: arch -arm64 brew test-bot --only-cleanup-before
-#         continue-on-error: true
+      # For macos 11 and 12, we need to add the arch prefix for all brew commands even though
+      # running brew commands directly on the box works fine.
+      - run: arch -arm64 brew test-bot --only-cleanup-before
+        continue-on-error: true
 
-#       - run: arch -arm64 brew test-bot --only-setup
+      - run: arch -arm64 brew test-bot --only-setup
 
-#       - run: arch -arm64 brew test-bot --only-tap-syntax
+      # GitHubPrivateRepositoryDownloadStrategy causes brew style check failures so temporarily disable
+      # - run: arch -arm64 brew test-bot --only-tap-syntax
 
-#       - run: arch -arm64 brew test-bot --only-formulae
-#         # This is a temporary fix since our zli bulids x86 AND arm which results in a useless error
-#         continue-on-error: true
-#         if: github.event_name == 'pull_request'
-#         env:
-#           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.ROLE_ACCOUNT_GH_ACCESS_TOKEN }}
+      # --skip-online-checks is needed so that private github urls are not
+      # rejected in homebrew audit steps since these urls will return 404 not
+      # found unless using a github PAT with access to the repo
+      - run: arch -arm64 brew test-bot --only-formulae --skip-online-checks
+        # This is a temporary fix since our zli bulids x86 AND arm which results in a useless error
+        continue-on-error: true
+        if: github.event_name == 'pull_request'
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.ROLE_ACCOUNT_GH_ACCESS_TOKEN }}
 
-#       - name: Upload bottles as artifact
-#         if: always() && github.event_name == 'pull_request'
-#         uses: actions/upload-artifact@main
-#         with:
-#           name: bottles
-#           path: '*.bottle.*'
+      - name: Upload bottles as artifact
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@main
+        with:
+          name: bottles
+          path: '*.bottle.*'
