@@ -91,8 +91,7 @@ class GitHubPrivateRepositoryDownloadStrategy < CurlDownloadStrategy
   end
 
   def resolve_url_basename_time_file_size(url, timeout: nil)
-    url = download_url
-    super
+    [download_url, "", Time.now, 0, false]
   end
 end
 
