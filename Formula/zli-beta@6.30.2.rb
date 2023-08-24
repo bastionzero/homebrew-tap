@@ -2,7 +2,7 @@ require "language/node"
 require "os"
 require_relative "../lib/git_hub_private_repository_download_strategy"
 
-class ZliBeta < Formula
+class ZliBetaAT6302 < Formula
   desc "BastionZero cli - Beta"
   homepage "https://www.bastionzero.com"
   url "https://github.com/bastionzero/zli/releases/download/6.30.2-beta/zli-6.30.2-beta.tar.gz", :using => GitHubPrivateRepositoryReleaseDownloadStrategy
