@@ -38,7 +38,7 @@ jobs:
       # --skip-online-checks is needed so that private github urls are not
       # rejected in homebrew audit steps since these urls will return 404 not
       # found unless using a github PAT with access to the repo
-      - run: brew test-bot --only-formulae --skip-online-checks
+      - run: brew test-bot --only-formulae --skip-online-checks zli zli-beta
         if: github.event_name == 'pull_request'
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.ROLE_ACCOUNT_GH_ACCESS_TOKEN }}
