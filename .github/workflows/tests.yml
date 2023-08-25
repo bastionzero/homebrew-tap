@@ -11,6 +11,8 @@ jobs:
       matrix:
         os: [macos-11, macos-12, macos-13]
     runs-on: ${{ matrix.os }}
+    env:
+      TESTING_FORMULAE: bastionzero/tap/zli
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -34,6 +36,12 @@ jobs:
 
       # GitHubPrivateRepositoryDownloadStrategy causes brew style check failures so temporarily disable
       # - run: brew test-bot --only-tap-syntax
+
+      # Use bastionzero/tap/zli-beta instead of the default bastionzero/tap/zli
+      # as the testing formulae if the branch name contains zli-beta
+      - name: Set TESTING_FORMULAE env to bastionzero/tap/zli-beta
+        if: contains(github.ref, 'zli-beta')
+        run: echo "TESTING_FORMULAE=bastionzero/tap/zli-beta" >> $GITHUB_ENV
 
       # --skip-online-checks is needed so that private github urls are not
       # rejected in homebrew audit steps since these urls will return 404 not
