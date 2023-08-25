@@ -38,15 +38,15 @@ jobs:
       # - run: brew test-bot --only-tap-syntax
 
       # Use bastionzero/tap/zli-beta instead of the default bastionzero/tap/zli
-      # as the testing formulae if the branch name contains zli-beta
+      # as the testing formulae if the branch name contains beta
       - name: Set TESTING_FORMULAE env to bastionzero/tap/zli-beta
-        if: contains(github.ref, 'zli-beta')
+        if: contains(github.ref, 'beta')
         run: echo "TESTING_FORMULAE=bastionzero/tap/zli-beta" >> $GITHUB_ENV
 
       # --skip-online-checks is needed so that private github urls are not
       # rejected in homebrew audit steps since these urls will return 404 not
       # found unless using a github PAT with access to the repo
-      - run: brew test-bot --only-formulae --skip-online-checks --testing-formulae=bastionzero/tap/zli,bastionzero/tap/zli-beta
+      - run: brew test-bot --only-formulae --skip-online-checks --testing-formulae=$TESTING_FORMULAE
         if: github.event_name == 'pull_request'
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.ROLE_ACCOUNT_GH_ACCESS_TOKEN }}
