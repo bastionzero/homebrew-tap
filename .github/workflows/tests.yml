@@ -40,7 +40,7 @@ jobs:
       # Use bastionzero/tap/zli-beta instead of the default bastionzero/tap/zli
       # as the testing formulae if the branch name contains beta
       - name: Set TESTING_FORMULAE env to bastionzero/tap/zli-beta
-        if: contains(github.ref, 'beta')
+        if: contains(github.head_ref, 'beta')
         run: echo "TESTING_FORMULAE=bastionzero/tap/zli-beta" >> $GITHUB_ENV
 
       # --skip-online-checks is needed so that private github urls are not
