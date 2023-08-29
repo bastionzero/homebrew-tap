@@ -1,6 +1,6 @@
 require "language/node"
 require "os"
-require_relative "../../lib/git_hub_private_repository_download_strategy"
+require_relative "../lib/git_hub_private_repository_download_strategy"
 
 class ZliBeta < Formula
   desc "BastionZero cli - Beta"
@@ -40,3 +40,4 @@ class ZliBeta < Formula
     system "#{bin}/zli-beta", "configure"
   end
 end
+
