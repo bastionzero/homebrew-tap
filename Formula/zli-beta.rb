@@ -6,7 +6,7 @@ class ZliBeta < Formula
   desc "BastionZero cli - Beta"
   homepage "https://www.bastionzero.com"
   url "https://github.com/bastionzero/zli/releases/download/6.32.0-beta/zli-6.32.0-beta.tar.gz", :using => GitHubPrivateRepositoryReleaseDownloadStrategy
-  sha256 "$SHA256"
+  sha256 "46df7b53042ca6a11a68d5761f97637480c85acfd027be03117df785c4f17493"
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git", branch: "master"
 
