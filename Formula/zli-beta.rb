@@ -11,7 +11,7 @@ class ZliBeta < Formula
   head "https://github.com/bastionzero/zli.git", branch: "master"
 
   bottle do
-  root_url "https://github.com/bastionzero/homebrew-tap/releases/download/zli-beta-6.32.0-beta"
+    root_url "https://github.com/bastionzero/homebrew-tap/releases/download/zli-beta-6.32.0-beta"
   sha256 cellar: :any_skip_relocation, arm64_ventura:  "665ec5304498c57fa144c153a77b580104cb4c459d830534e3d1171ab9eeb328"
   sha256 cellar: :any_skip_relocation, arm64_monterey: "63fe7841bc28cf4f09bada9d0537fe8280d07230a1e448c30c6c6893127feb55"
   sha256 cellar: :any_skip_relocation, arm64_big_sur:  "bb0b6c2830b124b325eb807330d5bbe12d0823d269f7a07a37121770dba38346"
