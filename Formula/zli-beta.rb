@@ -36,3 +36,7 @@ class ZliBeta < Formula
     end
   end
   
+  test do
+    system "#{bin}/zli-beta", "configure"
+  end
+end
