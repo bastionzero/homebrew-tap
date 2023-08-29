@@ -35,7 +35,7 @@ class ZliBeta < Formula
       bin.install "bin/zli-macos" => "zli-beta"
     end
   end
-  
+
   test do
     system "#{bin}/zli-beta", "configure"
   end
