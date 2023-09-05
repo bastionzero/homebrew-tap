@@ -10,8 +10,6 @@ jobs:
       matrix:
         os: [macos-11-arm, macos-12-arm, macos-13-arm]
     runs-on: ${{ matrix.os }}
-    env:
-      TESTING_FORMULAE: bastionzero/tap/zli
     steps:
       - name: Install Rosetta for any x86 arch operations
         continue-on-error: true
@@ -49,17 +47,11 @@ jobs:
 
       # GitHubPrivateRepositoryDownloadStrategy causes brew style check failures so temporarily disable
       # - run: arch -arm64 brew test-bot --only-tap-syntax
-
-      # Use bastionzero/tap/zli-beta instead of the default bastionzero/tap/zli
-      # as the testing formulae if the branch name contains beta
-      - name: Set TESTING_FORMULAE env to bastionzero/tap/zli-beta
-        if: contains(github.head_ref, 'beta')
-        run: echo "TESTING_FORMULAE=bastionzero/tap/zli-beta" >> $GITHUB_ENV
     
       # --skip-online-checks is needed so that private github urls are not
       # rejected in homebrew audit steps since these urls will return 404 not
       # found unless using a github PAT with access to the repo
-      - run: arch -arm64 brew test-bot --only-formulae --skip-online-checks --testing-formulae=$TESTING_FORMULAE
+      - run: arch -arm64 brew test-bot --only-formulae --skip-online-checks
         # This is a temporary fix since our zli bulids x86 AND arm which results in a useless error
         continue-on-error: true
         if: github.event_name == 'pull_request'
