@@ -5,7 +5,8 @@ require_relative "../lib/git_hub_private_repository_download_strategy"
 class Zli < Formula
   desc "BastionZero cli"
   homepage "https://www.bastionzero.com"
-  url "https://github.com/bastionzero/zli/releases/download/6.32.1/zli-6.32.1.tar.gz", :using => GitHubPrivateRepositoryReleaseDownloadStrategy
+  url "https://github.com/bastionzero/zli/releases/download/6.32.1/zli-6.32.1.tar.gz",
+      using: GitHubPrivateRepositoryReleaseDownloadStrategy
   sha256 "bcd64d72a493829601ee73e1c28966a50d4c8a2e5f0db4c4bc965ff8aceaf548"
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git", branch: "master"
