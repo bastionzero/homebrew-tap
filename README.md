@@ -19,7 +19,7 @@ BastionZero offers the zli in pre-built binaries for the following matrix.
 ## Downgrading
 BastionZero cannot guarantee compatability when downgrading.
 
-Brew does not support the same kind of versioning in taps as they do in homebrew/core. Because of this, we recommend following the only documented methodology.
+Brew does not support the same kind of versioning in taps as they do in homebrew/core. Because of this, we recommend the following:
 
 
 1. Create a new local tap
@@ -30,16 +30,10 @@ $ brew tap-new $USER/local-zli
 ```console
 $ brew extract --version=<version> bastionzero/tap/zli $USER/local-zli
 ```
-3. run brew install@version as usual
+3. Run brew install@version
 ```console
 $ brew install zli@<version>
 ```
-
-For more information on what's happening and why to use this method, please see the following tutorials:
-
-https://blog.sandipb.net/2021/09/02/installing-a-specific-version-of-a-homebrew-formula/
-
-https://cmichel.io/how-to-install-an-old-package-version-with-brew/
 
 ## Documentation
 
