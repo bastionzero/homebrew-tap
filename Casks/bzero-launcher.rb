@@ -1,6 +1,6 @@
 cask "bzero-launcher" do
-  version "0.1.4"
-  sha256 "849d4d52fa3a07c1efc30676a89c8cfcd962d0cf83c4afc16ee4010007e7f00a"
+  version "0.1.4,20231020.175704"
+  sha256 :no_check
 
   url "https://download-desktop-app.bastionzero.com/release/latest/bin/macos-latest.dmg"
   name "Bzero Launcher"
