@@ -5,17 +5,11 @@ require_relative "../lib/git_hub_private_repository_download_strategy"
 class ZliBeta < Formula
   desc "BastionZero cli - Beta"
   homepage "https://www.bastionzero.com"
-  url "https://github.com/bastionzero/zli/releases/download/6.36.0-beta/zli-6.36.0-beta.tar.gz",
+  url "https://github.com/bastionzero/zli/releases/download/6.36.1-beta/zli-6.36.1-beta.tar.gz",
     using: GitHubPrivateRepositoryReleaseDownloadStrategy
-  sha256 "7f0c9ca93d9ac73a8515cd03f2b36001c7115320de8687592e6b0f2bf9e3c33a"
+  sha256 "c3fc95fd14940870f21dcfc1001cdc5e438022854e7407803415292d9ac44e0b"
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git", branch: "master"
-
-  bottle do
-    root_url "https://github.com/bastionzero/homebrew-tap/releases/download/zli-beta-6.36.0-beta"
-    sha256 cellar: :any_skip_relocation, arm64_monterey: "2ec70d55821650c480b419dbf90e58357aff837ea788b77c9f5eaf9d191664bb"
-    sha256 cellar: :any_skip_relocation, monterey:       "2fcbb23e3d07887f8bf902a5fec214a7e5945bf1cfbeb2bd8951ab74c9619a17"
-  end
 
   depends_on "go@1.20" => :build
   depends_on "node@14"
