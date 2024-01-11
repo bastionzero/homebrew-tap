@@ -8,7 +8,7 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        os: [macos-11-arm, macos-12-arm, macos-13-arm]
+        os: [macos-12-arm, macos-13-arm]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install Rosetta for any x86 arch operations
