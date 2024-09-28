@@ -11,6 +11,13 @@ class ZliBeta < Formula
   license "Apache-2.0"
   head "https://github.com/bastionzero/zli.git", branch: "master"
 
+  bottle do
+    root_url "https://github.com/bastionzero/homebrew-tap/releases/download/zli-beta-6.36.20-beta"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "47458f2f7678524580500b9e4d9d2410f0a35b68b7c035748115dad38978328a"
+    sha256 cellar: :any_skip_relocation, arm64_ventura: "1d3e6f51a63e558c333526e0eb5faf75848e43b7957d05893cb52d598fae1f10"
+    sha256 cellar: :any_skip_relocation, ventura:       "f3a612b337c599534d02b39d16a748ca1fddd5496218efca5b52a27acc229c3d"
+  end
+
   depends_on "go@1.20" => :build
   depends_on "node@20" => :build
 
