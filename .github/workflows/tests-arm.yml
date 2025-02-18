@@ -28,7 +28,7 @@ jobs:
 
       - name: Cache Homebrew Bundler RubyGems
         id: cache
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
           key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
@@ -52,7 +52,7 @@ jobs:
       # rejected in homebrew audit steps since these urls will return 404 not
       # found unless using a github PAT with access to the repo
       - run: arch -arm64 brew test-bot --only-formulae --skip-online-checks
-        # This is a temporary fix since our zli bulids x86 AND arm which results in a useless error
+        # This is a temporary fix since our zli builds x86 AND arm which results in a useless error
         continue-on-error: true
         if: github.event_name == 'pull_request'
         env:
@@ -60,7 +60,7 @@ jobs:
 
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bottles
           path: '*.bottle.*'
