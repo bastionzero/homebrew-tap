@@ -8,7 +8,7 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        os: [macos-13-xlarge, macos-14]
+        os: [macos-13-xlarge, macos-14, macos-15]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install Rosetta for any x86 arch operations
@@ -28,7 +28,7 @@ jobs:
 
       - name: Cache Homebrew Bundler RubyGems
         id: cache
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
           key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
@@ -52,15 +52,17 @@ jobs:
       # rejected in homebrew audit steps since these urls will return 404 not
       # found unless using a github PAT with access to the repo
       - run: arch -arm64 brew test-bot --only-formulae --skip-online-checks
-        # This is a temporary fix since our zli bulids x86 AND arm which results in a useless error
+        # This is a temporary fix since our zli builds x86 AND arm which results in a useless error
         continue-on-error: true
         if: github.event_name == 'pull_request'
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.ROLE_ACCOUNT_GH_ACCESS_TOKEN }}
 
+      # ref: https://github.com/Homebrew/brew/blob/cf635bc28a02d696a16df58ec77ea99524d20d7e/Library/Homebrew/dev-cmd/tap-new.rb
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: bottles
+          name: bottles_${{ matrix.os }}
           path: '*.bottle.*'
+          if-no-files-found: error
