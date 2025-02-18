@@ -58,9 +58,10 @@ jobs:
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.ROLE_ACCOUNT_GH_ACCESS_TOKEN }}
 
+      # ref: https://github.com/Homebrew/brew/blob/cf635bc28a02d696a16df58ec77ea99524d20d7e/Library/Homebrew/dev-cmd/tap-new.rb
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
-          name: bottles
+          name: bottles_${{ matrix.os }}
           path: '*.bottle.*'
