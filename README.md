@@ -12,8 +12,9 @@ BastionZero offers the zli in pre-built binaries for the following matrix.
 
 | OS                 | x86                | arm64                |
 | ------------------ | ------------------ | -------------------- |
+| MacOS 15 Sequoia   |                    | :white_check_mark:   |
+| MacOS 14 Sonoma    |                    | :white_check_mark:   |
 | MacOS 13 Ventura   | :white_check_mark: | :white_check_mark:   |
-| MacOS 12 Monterey  | :white_check_mark: | :white_check_mark:   |
 
 ## Downgrading
 BastionZero cannot guarantee compatability when downgrading.
