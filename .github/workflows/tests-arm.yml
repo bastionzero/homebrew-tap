@@ -3,7 +3,11 @@ on:
   push:
     branches:
       - main
+    paths: 
+    - 'Formula/**'
   pull_request:
+    paths: 
+    - 'Formula/**'
 jobs:
   test-bot:
     strategy:
