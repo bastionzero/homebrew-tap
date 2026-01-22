@@ -33,10 +33,11 @@ jobs:
           git checkout pr-$PULL_REQUEST
           
           # 2. Run the pull (this adds the 'bottle do' lines and commits them locally)
-          brew pr-pull --debug --workflows=tests-arm.yml --tap=$GITHUB_REPOSITORY $PULL_REQUEST
+          brew pr-pull --debug --no-cherry-pick --workflows=tests-arm.yml --tap=$GITHUB_REPOSITORY $PULL_REQUEST
 
       - name: Push commits
         uses: Homebrew/actions/git-try-push@master
         with:
           token: ${{ secrets.PAT }}
           branch: ${{ github.event.pull_request.head.ref }}
+          force: true
