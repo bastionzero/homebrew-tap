@@ -26,10 +26,14 @@ jobs:
       - name: Pull bottles
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.PAT }}
-          HOMEBREW_GITHUB_PACKAGES_TOKEN: ${{ secrets.PAT }}
-          HOMEBREW_GITHUB_PACKAGES_USER: ${{ github.actor }}
           PULL_REQUEST: ${{ github.event.pull_request.number }}
-        run: export HOMEBREW_NO_INSTALL_FROM_API=1 ; brew pr-pull --debug --workflows=tests-arm.yml --tap=$GITHUB_REPOSITORY $PULL_REQUEST
+        run: |
+          # 1. Fetch the PR branch and switch to it
+          git fetch origin pull/$PULL_REQUEST/head:pr-$PULL_REQUEST
+          git checkout pr-$PULL_REQUEST
+          
+          # 2. Run the pull (this adds the 'bottle do' lines and commits them locally)
+          brew pr-pull --debug --workflows=tests-arm.yml --tap=$GITHUB_REPOSITORY $PULL_REQUEST
 
       - name: Push commits
         uses: Homebrew/actions/git-try-push@master
