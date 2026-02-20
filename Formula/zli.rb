@@ -17,7 +17,7 @@ class Zli < Formula
     sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3e751f5828923854114e709629eb687509dbaf95aa05a4b96825b84867e5846c"
   end
 
-  depends_on "go@1.20" => :build
+  depends_on "go" => :build
   depends_on "node@20" => :build
 
   def install
