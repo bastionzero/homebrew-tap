@@ -13,8 +13,9 @@ class Zli < Formula
 
   bottle do
     root_url "https://github.com/bastionzero/homebrew-tap/releases/download/zli-6.36.25"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8199c36c7d3b6736e929400733c8598a87e5b8c0c4043bb0731f70468b5a339c"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3e751f5828923854114e709629eb687509dbaf95aa05a4b96825b84867e5846c"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6da3d0eae07893214fbb56b823efb3cc33ab02605a760e22ef399ed12a090407"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b4595f19985bd4bc5e9ebdad919806dfce291f3e3a1d090b00dc003aa90b4408"
   end
 
   depends_on "go" => :build
